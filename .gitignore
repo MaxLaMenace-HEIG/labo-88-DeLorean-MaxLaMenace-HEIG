@@ -1,0 +1,8 @@
+# Ignore some folders
+.vscode
+
+#Ignore some files
+mua1d
+solution.c
+*.o
+*.pdf
