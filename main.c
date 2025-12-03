@@ -1,5 +1,5 @@
 /**
- * @brief Calcule la hauteur de chute d'un objet sur trois planettes après vérification de l'entrée d'utilisateur
+ * @brief A plutonium-fueled void-pointer-casting function that drives down the stack ransacking it like it's a german highway
  * @author Maxence Rosselet maxence.rosselet-christ@heig-vd.ch
  *
  * @note COMPILE: make clean && make
@@ -30,49 +30,6 @@ void heheArray();
 void eightyEightUBPH();
 void engineRev(void** stackVehicle, int gearCount);
 int handKeyOver(int* dashBoard[]);
-
-double checkPlanet() 
-{   
-    char planet;
-    scanf(" %c", &planet);
-    while (getchar() != '\n') ;
-    if ((planet=='t')||(planet=='T')) 
-        return 9.81;
-    else if ((planet=='l')||(planet=='L')) 
-        return 1.62;
-    else if ((planet=='m')||(planet=='M')) 
-        return 3.73;
-    else 
-        return -1;
-}
-
-void scanPlanet(double* g) 
-{   
-    char planet[2];
-    if (scanf(" %1[tTlLmM] %1[\n]", &planet[0], &planet[1]) != 2) *g=-1;
-    else switch (tolower(planet[0]))
-    {
-        case 't': *g=9.81; break;
-        case 'l': *g=1.62; break;
-        case 'm': *g=3.73; break;
-        default :
-            if(VERBOSE) printf("how did you even-\n");
-            *g=log10(0);
-    }
-}
-
-
-double matchPlanet() 
-{
-const char okPlanets[6] = {'t', 'T', 'l', 'L', 'm', 'M'};
-const double g[3] = {9.81, 1.62, 3.73};
-char c;
-if (scanf(" %c%*[^\n]", &c))
-    for (int i=0; i<6; i++)
-        if (c == okPlanets[i]) 
-            return g[i/2];
-return -1;
-}
 
 void eightyEightUBPH() 
 {   
@@ -214,6 +171,56 @@ int handKeyOver(int* dashBoard[])
         } 
 }
 
+int main(void)
+{
+    if (0) heheArray();
+    eightyEightUBPH();
+    return 0;
+}
+
+/**
+ * @brief Calcule la hauteur de chute d'un objet sur trois planettes après vérification de l'entrée d'utilisateur
+ * @return 0 si pas d'erreur,
+ * @return 1 si erreur d'entrée : terre = t ou T, lune = l ou L, mars = m ou M, 
+ * @return 2 si distance invalide
+ * */
+int main2(void) {
+
+    double g = 0, fallHeight = 0;
+    printf("Merci de choisir la planète : ");
+    g = matchPlanet();
+    if (g<0) {return 1;}
+    //checks valid entry
+    
+    printf("\nEntrer la hauteur [m] :");
+    if (!scanf("%lf", &fallHeight))
+    { return 1;}
+        else 
+    if (fallHeight > 0)
+        printf("\n");
+        else {
+        printf("\ninvalid entry\n");
+        return 2;
+        }
+    
+    const double t = sqrt((2*fallHeight)/g);
+    const double v = sqrt((2*fallHeight)*g)/3.6;
+
+    char* rowLabel[] = {"Résultats:", "Accélération:", "Hauteur de Chute:", "Temps de Chute:", "Vitesse Finale:"};
+
+    printf("%-20s\n", rowLabel[0]);
+    printf("%-22s", rowLabel[1]);
+    printf ("%lg [m/s^2]\n", g);
+    printf("%-20s", rowLabel[2]);
+    printf ("%lg [m]\n", fallHeight);
+    printf("%-20s", rowLabel[3]);
+    printf ("%lg [secondes]\n", t);
+    printf("%-20s", rowLabel[4]);
+    printf ("%lg [km/h]\n", v);
+    return 0;
+}
+
+
 void heheArray() 
 {
 printf("%lu_%lu\n", strlen("ecole"), strlen("école"));
@@ -291,162 +298,4 @@ for (int j=0; j<1; j++)
             printf("%p_____[%d] : %8.3g_'%c'%-3c\n",&leviosaa[i],i, (double)(int)leviosaa[i], (char)leviosaa[i], ',');
     }
     printf("\n");
-}
-
-int main(void)
-{
-    if (0) heheArray();
-    eightyEightUBPH();
-    return 0;
-}
-
-/**
- * @brief Calcule la hauteur de chute d'un objet sur trois planettes après vérification de l'entrée d'utilisateur
- * @return 0 si pas d'erreur,
- * @return 1 si erreur d'entrée : terre = t ou T, lune = l ou L, mars = m ou M, 
- * @return 2 si distance invalide
- * */
-int main2(void) {
-
-    double g = 0, fallHeight = 0;
-    printf("Merci de choisir la planète : ");
-    g = matchPlanet();
-    if (g<0) {return 1;}
-    //checks valid entry
-    
-    printf("\nEntrer la hauteur [m] :");
-    if (!scanf("%lf", &fallHeight))
-    { return 1;}
-        else 
-    if (fallHeight > 0)
-        printf("\n");
-        else {
-        printf("\ninvalid entry\n");
-        return 2;
-        }
-    
-    const double t = sqrt((2*fallHeight)/g);
-    const double v = sqrt((2*fallHeight)*g)/3.6;
-
-    char* rowLabel[] = {"Résultats:", "Accélération:", "Hauteur de Chute:", "Temps de Chute:", "Vitesse Finale:"};
-
-    printf("%-20s\n", rowLabel[0]);
-    printf("%-22s", rowLabel[1]);
-    printf ("%lg [m/s^2]\n", g);
-    printf("%-20s", rowLabel[2]);
-    printf ("%lg [m]\n", fallHeight);
-    printf("%-20s", rowLabel[3]);
-    printf ("%lg [secondes]\n", t);
-    printf("%-20s", rowLabel[4]);
-    printf ("%lg [km/h]\n", v);
-    return 0;
-}
-
-
-void printfGuideThrough() 
-{   
-    char planet[3] = "000";
-    char planet_b[3] = "000";
-    // the below one works with : %s -> planet, as long as planet[1] is checked for the automatically added 'end of string' \0 char. if string longer than 1, then planet [1] will be whatever the second character was
-    //oooooooooooooooooh it skips spaces, so I can overfill it by... filling it with blank spaces, it then overflows on the second scanf... does weird things if :p printed.
-    scanf("%s", planet);
-    // the below one crashes by trying to write a '1 sized string' (with a second \0 char) to planet[0] which is a char
-    //scanf("%1s", planet[0]);
-    printf("\n0['%c'_%d]_1['%c'_%d]_2['%c'_%d]\n", planet[0],(int)planet[0],planet[1],(int)planet[1],planet[2],(int)planet[2]);
-    printf("Merci de choisir la planete une deuxième fois avec la même séquence de caractères svp lol: ");
-    // the below one works with three %c getting max 3 chars of your input to planet[0 to 2], BUT takes a carriage return left in the buffer.
-    scanf("%c%c%c", &planet_b[0], &planet_b[1], &planet_b[2]);
-    printf("\n0['%c'_%d]_1['%c'_%d]_2['%c'_%d]\n", planet_b[0],(int)planet_b[0],planet_b[1],(int)planet_b[1],planet_b[2],(int)planet_b[2]);
-}
-
-
-char getPlanet1() 
-{   
-    char planet[3] = "000";
-    scanf("%2c", planet); //marche normalement si un seul caractère entré puis enter. Casse si deux caractères entrés.
-   
-    while (getchar() != '\n');  //sinon ça casse tout lol
-
-    return 'x';
-}
-char getPlanet2()
-{
-    printf("Merci de choisir la planete : ");
-    char planet[3] = "000";
-    //double fallHeight = -1;
-    scanf("%1s", planet);
-
-    char c;
-    while ((c = (char)getchar()), c != '\n') {printf("%c", c);}
-
-    printf("\n0['%c'_%d]_1['%c'_%d]_2['%c'_%d]\n", planet[0],(int)planet[0],planet[1],(int)planet[1],planet[2],(int)planet[2]);
-    return 'x';
-}
-char hesitantlyCheckPlanet() 
-{   
-    char planet;
-    char buffer[50];
-    for (int i=0; i>50; i++) 
-    {
-        buffer[i] = '0';
-    }
-    scanf("%c%s", &planet, &buffer[0]); //please don't write more than 50 characters :'c
-    if (planet == 't') 
-    {
-        return 't';
-    } 
-    else if (planet == 'T') 
-    {
-        return 't';
-    } 
-    else if (planet == 'l') 
-    {
-        return 'l';
-    } 
-    else if (planet == 'L') 
-    {
-        return 'l';
-    } 
-    else if (planet == 'm') 
-    {
-        return 'm';
-    } 
-    else if (planet == 'M') 
-    {
-        return 'm';
-    } 
-    else 
-    {
-        return 'X';
-    }
-}
-char wontGetPlanet()
-{   
-    //echoue parce qu'il ATTEND d'avoir 3 caracteres... donc un seul + enter ne passe pas à la suite, il attend le troisième
-    char planet[3] = "000";
-    int charCount = scanf("%c%c%c", &planet[0], &planet[1], &planet[2]);
-    printf("\n%d\n",charCount);
-    //lui... marche et j'aime pas qu'il marche, parce que lol, compter sur le fait que tu peux pas soumettre le scanf sans appuyer sur retour à la ligne derrière... bah je l'ai fait.
-    // MAIS filtrer le "un seul retour à la ligne immédiatement après" tout en laissant la comparaison du premier caractère à la suite...
-    // why ???
-    charCount = scanf("%c%1[\n]", &planet[0], &planet[1]);
-    printf("\n%d\n",charCount);
-    printf("\n0['%c'_%d]_1['%c'_%d]_2['%c'_%d]\n", planet[0],(int)planet[0],planet[1],(int)planet[1],planet[2],(int)planet[2]);
-    if (charCount >=3) {printf("\ninvalid entry\n"); return 1;}
-
-    return 'x';
-}
-char salut()
-{
-    int i;
-    char str[20];
-    printf("i: ");
-    scanf("%d", &i);
-    printf("Entrer un mot: ");
-    scanf("%19s", str);
-    printf("Votre mot: %s\n", str);
-
-    while (getchar() != '\n');
-
-    return 'x';
 }
