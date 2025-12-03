@@ -188,7 +188,6 @@ int main2(void) {
 
     double g = 0, fallHeight = 0;
     printf("Merci de choisir la planète : ");
-    g = matchPlanet();
     if (g<0) {return 1;}
     //checks valid entry
     
