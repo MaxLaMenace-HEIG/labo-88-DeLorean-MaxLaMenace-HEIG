@@ -4,7 +4,7 @@
 # Octobre 2025
 #
 
-EXEC = mua1d
+EXEC = DeLorean
 
 # Debug
 CFLAGS  = -g -Wall -Wextra -Wpedantic
@@ -27,7 +27,7 @@ help:
 	@echo 'clean       Delete automatically created files.'
 
 $(EXEC):
-	$(CC) $(CFLAGS) main.c -o $(EXEC) $(LDFLAGS)
+	$(CC) $(CFLAGS) main.c DeLorean.c -o $(EXEC) $(LDFLAGS)
 
 clean:
 	rm -f ./*.o

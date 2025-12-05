@@ -2,9 +2,7 @@
 #include <math.h>
 #include <ctype.h>
 #include <string.h>
-
-void engineRev(void** stackVehicle, int gearCount);
-int handKeyOver(int* dashBoard[]);
+#include "DeLorean.h"
 
 int handKeyOver(int* dashBoard[])
 {   

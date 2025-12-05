@@ -22,7 +22,7 @@ l’utilisateur.
 #include <math.h>
 #include <ctype.h>
 #include <string.h>
-#include <DeLorean.c>
+#include "DeLorean.h"
 
 #define VERBOSE 0
 
@@ -47,7 +47,7 @@ void eightyEightUBPH()
                             {"Doc : Undefined Behavior could Segfault the flux capacitor, Marty !"},
                             {"Marty : Man, that's heavy."}
                         };
-    void* DeLorean[] = {eightyEightUBPH, main, beeScript, movieScript, normalData, mundaneData, DeLorean};
+    void* DeLorean[] = {(void*)(__UINTPTR_TYPE__)eightyEightUBPH, (void*)(__UINTPTR_TYPE__)main, (void*)beeScript, movieScript, normalData, mundaneData, DeLorean};
     int transmissionGearCount = sizeof(DeLorean)/sizeof(DeLorean[1]);
     engineRev(DeLorean, transmissionGearCount-1);
 
@@ -158,6 +158,7 @@ void eightyEightUBPH()
                     printf("\"%-63s\"", ransackedChars);
                 if (hud != 0) 
                 {
+                    if (brief_mode) printf("\n");
                     for (int h=0; h<8; h++) printf(" %16zX ", *(whyBother+h));
                 }
                 printf("\n");
