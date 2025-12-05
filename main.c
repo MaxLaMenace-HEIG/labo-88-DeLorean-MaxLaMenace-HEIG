@@ -31,14 +31,27 @@ void eightyEightUBPH();
 void engineRev(void** stackVehicle, int gearCount);
 int handKeyOver(int* dashBoard[]);
 
+int main(void)
+{
+    if (0) heheArray();
+    eightyEightUBPH();
+    return 0;
+}
+
 void eightyEightUBPH() 
 {   
     //AI generated comment of this human generated chaos : 'The function is role-playing a time-travelling car while committing war crimes against the stack.'
-    char* beeScript = "According to all known laws of aviations, there is no way a void pointer should be able to fly past this array. The pointer, of course, does anyway.";
+    const char* beeScript = "According to all known laws of aviations, there is no way a void pointer should be able to fly past this array. The pointer, of course, does anyway.";
     size_t normalData[] = {41,42,43,44,45,46,47,48};
     size_t mundaneData[] = {68,67,66,65,64,63,62,61};
-    char* movieScript = "Marty ! We need to go back in time and fix this ! The DeLorean crossed the forward stack boundaries and is venturing into uncharted territory !";
-    void* DeLorean[] = {eightyEightUBPH, heheArray, beeScript, normalData, movieScript, mundaneData, DeLorean};
+    char movieScript[][200] = {
+                            {"Doc : Marty ! We need to go back in time and fix this !"},
+                            {"Doc : The DeLorean crossed the forward stack boundaries !" "It's now venturing into uncharted territory !"},//longer than 100 chars -> gets shortened if char 100
+                            {"Doc : If we don't stop this, a Time paradox could destroy the universe, or worse !"},
+                            {"Doc : Undefined Behavior could Segfault the flux capacitor, Marty !"},
+                            {"Marty : Man, that's heavy."}
+                        };
+    void* DeLorean[] = {eightyEightUBPH, main, beeScript, movieScript, normalData, mundaneData, DeLorean};
     int transmissionGearCount = sizeof(DeLorean)/sizeof(DeLorean[1]);
     engineRev(DeLorean, transmissionGearCount-1);
 
@@ -47,33 +60,120 @@ void eightyEightUBPH()
     int* carCtrls[] = {&transmissionGearCount, &gear, &dir, &hud};
     go = handKeyOver(carCtrls);
     if (!go) printf("\nNo lol. That's too far EVEN for me. \n");
-
-    for (int i=0; i<z && go; i++) 
-    {       
-            
-            if((i)%64==0) 
+    
+    
+    for (int i=0; 
+        (dir*i < z) && (go); 
+        i = i + dir) 
+    {
+        const int getCharFromMemory_METHOD = 1;
+        const int brief_mode = 1;
+        char ransackedChars[80] = {0};
+        char* CeLorean = &(    (   (char*)DeLorean[gear]   )[i]  )  ; 
+        void* PeLorean =       (   (char*)DeLorean[gear]   )+i      ; 
+        //CeLorean is a pointer to the adress ( & ) of the i_th character ( [i] ) of the imaginary char string ( (char*) ) starting at the adress stored in DeLorean[gear]
+        //PeLorean treats DeLorean[gear] as the adress of a character chain (char*) and offsets the adress by i chars (=bytes). 
+        //Both should contain the same adress, their type aside.
+        
+//!EXECUTES EVERY 64 BYTES
+        if((dir*i)%64==0) 
             {   
-                char ransackedChars[80] = {0};
+/**
+ * TODO SCANS COMING 64 BYTES INTO BUFFER AND SANITIZES INPUT (reads "forward in stack" regardless of direction)
+ */
                 for (int y=0; y<64; y++) 
                 {   
-                    //sscanf(((char*)DeLorean[gear]) + dir*(i+y), "%1c",&ransackedChars[y]);
-                    ransackedChars[y] = *(((char*)DeLorean[gear])+ dir*(i+y)); //right, reading the character directly is more efficient lol
+                    
+                    ////sscanf(((char*)DeLorean[gear]) + dir*(i+y), "%1c",&ransackedChars[y]);
+                    ////right, reading the character directly is more efficient lol
+                    switch 
+                    (getCharFromMemory_METHOD) 
+                    {
+                        case 0:
+                            ransackedChars[y] = CeLorean[y];
+                            break;
+                        case 1:
+                            ransackedChars[y] = *((char*)PeLorean + y);
+                            break;
+                    }
                     if (ransackedChars[y] == 0) ransackedChars[y] = '_';
                     else if(ransackedChars[y] == 10) ransackedChars[y] = '~';
                     else if(ransackedChars[y] == 13) ransackedChars[y] = '<';
                     else if(ransackedChars[y] > 8 && ransackedChars[y] < 15) ransackedChars[y] = '#';
                     else if(ransackedChars[y] == 92) ransackedChars[y] = '/';
                 } 
-                printf("...%p <-starting at- p[%d][%5d] -reads 64 bytes-> : ",
-                    (void*)&(((char*)DeLorean[gear])[i*dir]), 
-                    gear, i*dir
-                    );
-                size_t* whyBother = ((char*)DeLorean[gear]) + dir*(i);
-                for (int h=0; h<8 && hud; h++) printf(" %16zX ", *(whyBother+h));
-                if (hud != 1) printf("\"%-63s\"", ransackedChars);
+
+/**
+ * TODO PRINTS ADRESS DEPENDING ON PRINTING TYPE (overly complex for no reason, needs overhaul)
+ */
+
+                switch (brief_mode)
+                {
+        //*prints full pointer values and full text legend. Might be too wide for both hex and string on a single line.
+                case 0: switch 
+                (getCharFromMemory_METHOD) 
+                    {
+                        case 0:
+                            printf("%p", (void*)&(CeLorean[0])); 
+                            printf("<-starting at- p[%d][%5d] -reads 64 bytes-> : ", gear, i);
+                            break;
+                        case 1:
+                            printf("%p", PeLorean);
+                            printf("<-starting at- p[%d][%5d] -reads 64 bytes-> : ", gear, i);
+                            break;
+                        default :
+                            printf("%p <-starting at- p[%d][%5d] -reads 64 bytes-> : ", (void*)&(((char*)DeLorean[gear])[i]), 
+                            gear, i*dir
+                            );
+                    }
+        //*truncates pointer values and full text legend. Might be too wide for both hex and string on a single line.
+                case 1: switch 
+                (getCharFromMemory_METHOD) 
+                    {
+                        case 0:
+                            printf("%zx.%zx", 
+                                ((size_t)&(CeLorean[0])) / (16*16*16*16) / (16*16*16*16) / 256, 
+                                ((size_t)&(CeLorean[0])) % (16*16*16*16)
+                                ); 
+                            printf("<- p[%d][%d] -%%64c->:", gear, i);
+                            break;
+                        case 1:
+                            printf("%zx.%zx", 
+                                ((size_t)PeLorean) / (16*16*16*16) / (16*16*16*16) / 256, 
+                                ((size_t)PeLorean) % (16*16*16*16)
+                                ); 
+                            printf("<- p[%d][%d] %%64c->:", gear, i);
+                            break;
+                    }
+                }
+
+/**
+ * TODO PRINTS HEX AND STRING VALUES DEPENDING ON PICKED METHOD (the "how to select the adress" method will end up as a COMPARE here and as EXAMPLES in a set function, lol)
+ */
+
+                ////size_t* whyBother = ((char*)DeLorean[gear]) + dir*(i);
+                size_t* whyBother = 
+                (getCharFromMemory_METHOD)
+                    ? (size_t*)PeLorean
+                    : (size_t*)&(CeLorean[0])
+                    ;
+
+                if (hud != 1) 
+                    printf("\"%-63s\"", ransackedChars);
+                if (hud != 0) 
+                {
+                    for (int h=0; h<8; h++) printf(" %16zX ", *(whyBother+h));
+                }
                 printf("\n");
             }
-    if ((i == (z-1)) && 1){
+
+//! end of 64-byte periodic execution !
+
+/**
+ * TODO USER PROMPT AT EACH INCREMENT REACHED
+ */
+
+    if (((i*dir) == (z-1)) && 1){
         printf("Keep going ? [enter]");
         char w = 0;
         z = (scanf("%1[\n]", &w)==1) ? z+511 : z ;
@@ -84,7 +184,7 @@ void eightyEightUBPH()
 
 void engineRev(void** stackVehicle, int gearCount)
 {
-        int z = 128;
+    int z = 128;
     for (int i=0, k=0; i<z; i++) 
     {       char adrEnd[50] = {0};
             sprintf(adrEnd, "%15s", "lol");
@@ -98,33 +198,24 @@ void engineRev(void** stackVehicle, int gearCount)
                 );
             } else
             {
-                if (i==0) printf("...%p <-at- p[%d][%d] -reads-> :\n\t", (void*)&((((size_t*)stackVehicle[k])[i]))
-                //%(16*16*16*16)
-                , k,i );
+                if (i==0) printf("...%p <-at- p[%d][%d] -reads-> :\n\t", 
+                    (void*)&((((size_t*)stackVehicle[k])[i])),
+                    k,i );
                 printf("%c",((char*)stackVehicle[k])[i]);
                 
             }
-            
-      //printf("\n");
     if (i == (z-2) && k<(gearCount)) {i=-1; k++; printf("\n");}
-    /*else if ((i == (z-2)) && 0){
-        printf("\n");
-        char w = 0;
-        z = (scanf("%1[y]%1[\n]", &w, &w)==2) ? z+500 : z ;
-        printf("...%p <-at- p[%d][%d]\n",&(((char*)stackVehicle[k])[i]), 
-                k,i);
-        }*/
     }
 }
 
 int handKeyOver(int* dashBoard[])
 {   
     char w[2]; 
+    char selector[2];
     //funnily enough, this needs to be 2-byte long in order to read 1 byte correctly from scanf. Else the terminating \0 is written in the next memory slot. 
     //Which in testing happened to be selector[0]. Where I put the R/D selection of the user. Which is then confirmed by reading the \n into w. Which overrides selector[0] with the \0 to terminate thee successfully read \n it scanf'd right afterwards.
     //which is ironically fitting as a way to jam the ignition of a litteral stack off-roader DeLorean
-    char selector[2] = "WW";
-    printf("\nEngine Lights : %p %p %p %p", (void*)dashBoard[0], (void*)dashBoard[1], (void*)dashBoard[2], (void*)dashBoard[3]);
+    printf("\nDashboard engine lights : %p %p %p %p", (void*)dashBoard[0], (void*)dashBoard[1], (void*)dashBoard[2], (void*)dashBoard[3]);
     printf("\nignition slots : %p %p", w, selector);
     printf("\n%d_%d_,_%d_%d_,_%d_%d\n",*dashBoard[1], *dashBoard[0],selector[0], selector[1], w[0], w[1]);
 
@@ -171,12 +262,7 @@ int handKeyOver(int* dashBoard[])
         } 
 }
 
-int main(void)
-{
-    if (0) heheArray();
-    eightyEightUBPH();
-    return 0;
-}
+
 
 /**
  * @brief Calcule la hauteur de chute d'un objet sur trois planettes après vérification de l'entrée d'utilisateur
