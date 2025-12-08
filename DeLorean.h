@@ -3,5 +3,6 @@
 
 void engineRev(void** stackVehicle, int gearCount);
 int handKeyOver(int* dashBoard[]);
+void memoryCruse();
 
 #endif

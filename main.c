@@ -62,7 +62,7 @@ void eightyEightUBPH()
         (dir*i < z) && (go); 
         i = i + dir) 
     {
-        const int getCharFromMemory_METHOD = 1;
+        const int getCharFromMemory_METHOD = 0;
         const int brief_mode = 1;
         char ransackedChars[80] = {0};
         char* CeLorean = &(    (   (char*)DeLorean[gear]   )[i]  )  ; 
